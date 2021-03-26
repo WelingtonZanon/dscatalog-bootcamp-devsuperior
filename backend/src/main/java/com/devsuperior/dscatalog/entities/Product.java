@@ -48,6 +48,7 @@ public class Product implements Serializable{
 	//coluna da outra entidade que sera associada
 	inverseJoinColumns = @JoinColumn(name="category_id"))
 	Set<Category> categories = new HashSet<>();
+	
 	//anotation JPA para declarar o instante no banco retirando o time zona, deixando no formato UTC( time univerçal)
 	@Column (columnDefinition= "TIMESTAMP WITHOUT TIME ZONE")
 	private Instant createdAt;
