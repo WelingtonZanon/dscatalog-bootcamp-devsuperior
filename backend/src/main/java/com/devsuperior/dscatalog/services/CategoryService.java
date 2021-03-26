@@ -9,6 +9,8 @@ import javax.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,15 +32,17 @@ public class CategoryService {
 	// transação somente leitura no banco
 	//cria um metodo findAll alimentando uma lista de categoryDTO.
 	@Transactional(readOnly=true)
-	public List<CategoryDTO> findAll(){
-		List<Category> list = repository.findAll();
+	public Page<CategoryDTO> findAllPaged(PageRequest pageRequest){
+		Page<Category> list = repository.findAll(pageRequest);
 		/*
 		 * transforma uma lista category e uma categoryDTO, a entidade morre aqui e segue a CategoryDTO
 		 * para os controladores REST. Trasomação usando a função map de alta ordem, necessario transformar
 		 * para stream e depois retornar o collect para uma lista novamente.
 		 * Função lambda(arrow function) java 8 em diante.
+		 * 
+		 * troca list por page, ai ele n precisa mais ser convertido, já é considerado um stream
 		 */
-		return list.stream().map(x -> new CategoryDTO(x)).collect(Collectors.toList());
+		return list.map(x -> new CategoryDTO(x));
 	}
 	@Transactional(readOnly=true)
 	public CategoryDTO findByID(Long id) {
