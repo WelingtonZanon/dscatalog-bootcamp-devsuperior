@@ -1,11 +1,11 @@
-import './core/assets/styles/custom.scss'
-import './app.scss'
-import Navbar from './core/components/Navbar';
+import './core/assets/styles/custom.scss';
+import './app.scss';
+import Routes from './Routes';
 
-const App = ()=>{
+const App = () => {
     return (
-        <Navbar></Navbar>
-        )
+        <Routes />
+    );
 }
 
 //nescessario exportar para por importar em outro canto
