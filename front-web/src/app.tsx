@@ -1,8 +1,11 @@
 import './core/assets/styles/custom.scss'
 import './app.scss'
+import Navbar from './core/components/Navbar';
 
 const App = ()=>{
-    return <h1>Hello App</h1>
+    return (
+        <Navbar></Navbar>
+        )
 }
 
 //nescessario exportar para por importar em outro canto
