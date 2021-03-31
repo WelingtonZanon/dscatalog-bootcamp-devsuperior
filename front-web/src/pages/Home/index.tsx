@@ -4,7 +4,7 @@ import ButtonIcon from '../../core/components/ButtonIcon';
 import { Link } from 'react-router-dom';
 const Home = ()=>(
     <div className="home-container">
-        <div className="row home-content">
+        <div className="row home-content card-base border-radios-20">
             <div className="col-6" >
                 <h1 className="text-title">
                     Conheça o melhor <br/> catálogo de produtos
