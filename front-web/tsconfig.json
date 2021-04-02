@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    //baseUrl para evitar ter q ficar pondo comando de retorno de pasta
+    "baseUrl": "./src",
     "target": "es5",
     "lib": [
       "dom",
