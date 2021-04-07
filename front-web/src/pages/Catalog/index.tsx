@@ -2,13 +2,16 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ProductCard from './components/ProductCard';
 import './styles.scss';
-import { makeRequest } from '../../core/utils/request';
-import { ProductsReponse } from '../../core/types/Product';
+import { makeRequest } from 'core/utils/request';
+import { ProductsReponse } from 'core/types/Product';
 import ProductCardLoader from './components/Loaders/ProductCardLoader';
+import Pagination from 'core/components/Pagination';
 const Catalog = () => {
 
+    
     const [productsResponse, setProductsReponse] = useState<ProductsReponse>();
     const [isLoading, setIsLoading] = useState(false);
+    const [activePage, setActivePage ] = useState(0);
     //console.log(productsResponse);
     /* useEffect é Hook (função) para acessa ciclo de
      vida do pomponente. Recebe uma função e um array.
@@ -27,8 +30,8 @@ const Catalog = () => {
          criando um core para chamar em execução       
              **/
         const params = {
-            page: 0,
-            linesPerPage: 16
+            page: activePage,
+            linesPerPage: 12
         }
         //inicia o loader antes de carregar os itens
         setIsLoading(true);
@@ -37,7 +40,7 @@ const Catalog = () => {
             .finally(() => {
                 setIsLoading(false);
             });
-    }, []);
+    }, [activePage]);
 
     return (
 
@@ -55,6 +58,10 @@ const Catalog = () => {
                     ))
                 )}
             </div>
+            {productsResponse && (<Pagination totalPages={productsResponse.totalPages}
+            activePage={activePage}
+            onChange={page=>setActivePage(page)}
+            />)}
         </div>
     );
 };
