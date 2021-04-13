@@ -20,8 +20,8 @@ import com.devsuperior.dscatalog.entities.Role;
 import com.devsuperior.dscatalog.entities.User;
 import com.devsuperior.dscatalog.repositories.RoleRepository;
 import com.devsuperior.dscatalog.repositories.UserRepository;
+import com.devsuperior.dscatalog.resources.ResourseNotFoundException;
 import com.devsuperior.dscatalog.services.exceptions.DatabaseException;
-import com.devsuperior.dscatalog.services.exceptions.ResourseNotFoundException;
 
 @Service
 public class UserService {

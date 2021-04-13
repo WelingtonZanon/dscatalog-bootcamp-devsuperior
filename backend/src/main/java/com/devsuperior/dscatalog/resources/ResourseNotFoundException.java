@@ -1,4 +1,4 @@
-package com.devsuperior.dscatalog.services.exceptions;
+package com.devsuperior.dscatalog.resources;
 
 //pode extender de somente de Exception, mas a tratativa é obrigatoria (try/cach).
 public class ResourseNotFoundException extends RuntimeException{
