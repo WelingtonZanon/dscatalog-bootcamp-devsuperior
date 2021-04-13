@@ -43,7 +43,7 @@ public class ProductDTO implements Serializable{
 		this(entity);
 		/*
 		 * para um produto eu posso ter uma lista de categoria trazendo pelo
-		 * DTO protegendo a entidade comfunção de alta ordem
+		 * DTO protegendo a entidade com função de alta ordem
 		 */
 		categories.forEach(cat -> this.categories.add(new CategoryDTO(cat)));
 	}
