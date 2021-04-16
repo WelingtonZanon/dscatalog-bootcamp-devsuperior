@@ -1,5 +1,6 @@
 package com.devsuperior.dscatalog.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -14,7 +15,10 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 //anotação JPA para configuração
 @Configuration
 public class AppConfig {
-
+	//importa o valor dos properties dos resources
+	@Value("${jwt.secret}")
+	private String jwtSecret;
+	
 	/*
 	 * anotação Bean, para dizer que essa stancia sera um componente gerenciada pelo
 	 * spring. BCryp um metodo de criptografar senha do spring
@@ -31,7 +35,7 @@ public class AppConfig {
 	@Bean
 	public JwtAccessTokenConverter accessTokenConverter() {
 		JwtAccessTokenConverter tokenConverter = new JwtAccessTokenConverter();
-		tokenConverter.setSigningKey("MY-JWT-SECRET");
+		tokenConverter.setSigningKey(jwtSecret);
 		return tokenConverter;
 	}
 
