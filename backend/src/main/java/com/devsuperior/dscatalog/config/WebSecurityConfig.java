@@ -41,6 +41,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	public void configure(WebSecurity web) throws Exception {
 		web.ignoring().antMatchers("/actuator/**");
+		//liberando o Swagger
+		web.ignoring().antMatchers("/v2/api-docs", "/configuration/ui",
+				"/swagger-resources/**",
+				"/configuration/**",
+				//endereço abaixo para verificar o teste apos o host local
+				"/swagger-ui.html",
+				"/webjars/**");
 	}
 
 	/*

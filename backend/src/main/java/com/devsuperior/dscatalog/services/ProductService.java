@@ -1,5 +1,7 @@
 package com.devsuperior.dscatalog.services;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
@@ -36,8 +38,12 @@ public class ProductService {
 	// transação somente leitura no banco
 	//cria um metodo findAll alimentando uma lista de categoryDTO.
 	@Transactional(readOnly=true)
-	public Page<ProductDTO> findAllPaged(PageRequest pageRequest){
-		Page<Product> list = repository.findAll(pageRequest);
+	public Page<ProductDTO> findAllPaged(Long categoryId,String name, PageRequest pageRequest){
+		//acrescentando o category para busca personalizada
+		List<Category> categories = (categoryId==0) ? null : Arrays.asList(categoryRepository.getOne(categoryId));
+		
+		
+		Page<Product> list = repository.find(categories,name, pageRequest);
 		/*
 		 * transforma uma lista category e uma categoryDTO, a entidade morre aqui e segue a ProductDTO
 		 * para os controladores REST. Trasomação usando a função map de alta ordem, necessario transformar
