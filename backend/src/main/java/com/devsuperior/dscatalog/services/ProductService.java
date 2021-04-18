@@ -1,5 +1,6 @@
 package com.devsuperior.dscatalog.services;
 
+import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -13,9 +14,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.devsuperior.dscatalog.dto.CategoryDTO;
 import com.devsuperior.dscatalog.dto.ProductDTO;
+import com.devsuperior.dscatalog.dto.UriDTO;
 import com.devsuperior.dscatalog.entities.Category;
 import com.devsuperior.dscatalog.entities.Product;
 import com.devsuperior.dscatalog.repositories.CategoryRepository;
@@ -28,6 +31,9 @@ import com.devsuperior.dscatalog.services.exceptions.DatabaseException;
 //spring trata como um injeção de serviços, "respeitando a semantica".
 @Service
 public class ProductService {
+	
+	@Autowired
+	private S3Service s3Service;
 	
 //Autowired spring tratar dependencia valida do Product repository : classe com anotation repository
 	@Autowired 
@@ -118,6 +124,11 @@ public class ProductService {
 			//insiro a categoria na lista da entidade
 			entity.getCategories().add(category);
 		}
+	}
+	//retornando a URL da image
+	public UriDTO uploadFile(MultipartFile file) {
+		URL url = s3Service.uploadFile(file);
+		return new UriDTO(url.toString());
 	}
 	
 }
