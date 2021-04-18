@@ -43,7 +43,11 @@ public class ProductService {
 		List<Category> categories = (categoryId==0) ? null : Arrays.asList(categoryRepository.getOne(categoryId));
 		
 		
-		Page<Product> list = repository.find(categories,name, pageRequest);
+		Page<Product> page = repository.find(categories,name, pageRequest);
+		
+		//chamada seca para implementar as categorias na lista de produtos.
+		repository.findProductWithCategories(page.getContent());
+		
 		/*
 		 * transforma uma lista category e uma categoryDTO, a entidade morre aqui e segue a ProductDTO
 		 * para os controladores REST. Trasomação usando a função map de alta ordem, necessario transformar
@@ -52,7 +56,7 @@ public class ProductService {
 		 * 
 		 * troca list por page, ai ele n precisa mais ser convertido, já é considerado um stream
 		 */
-		return list.map(x -> new ProductDTO(x));
+		return page.map(x -> new ProductDTO(x));
 	}
 	@Transactional(readOnly=true)
 	public ProductDTO findByID(Long id) {

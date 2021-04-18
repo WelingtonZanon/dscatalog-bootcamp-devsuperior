@@ -31,4 +31,14 @@ public interface ProductRepository extends JpaRepository<Product, Long>{
 			+ "(COALESCE(:categories) IS NULL OR cats IN :categories) AND"
 			+ "(LOWER(obj.name) LIKE LOWER(CONCAT('%',:name,'%')) )")
 	Page<Product> find (List<Category> categories,String name, Pageable pageable);
+	
+/*
+ * resolvendo problema da N+1 consulta e trazer as categorias na consulta sem voltar mais que daus 
+ * vezes no banco. JOIN FETCH é usado para incluir as categorias na pequisa do produto, primeiro pegamos os
+ * produtos e depois inclumos as categorias. O FETCH n trabalha com pages, então necessario o uso de listas
+ */
+	@Query("SELECT obj FROM Product obj JOIN FETCH obj.categories WHERE obj IN :products")
+	List<Product> findProductWithCategories(List<Product>products);
+	
+	
 }
