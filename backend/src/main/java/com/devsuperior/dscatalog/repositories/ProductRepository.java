@@ -33,7 +33,7 @@ public interface ProductRepository extends JpaRepository<Product, Long>{
 	Page<Product> find (List<Category> categories,String name, Pageable pageable);
 	
 /*
- * resolvendo problema da N+1 consulta e trazer as categorias na consulta sem voltar mais que daus 
+ * resolvendo problema da N+1 consulta e trazer as categorias na consulta sem voltar mais que duas 
  * vezes no banco. JOIN FETCH é usado para incluir as categorias na pequisa do produto, primeiro pegamos os
  * produtos e depois inclumos as categorias. O FETCH n trabalha com pages, então necessario o uso de listas
  */
