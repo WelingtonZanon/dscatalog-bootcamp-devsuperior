@@ -19,7 +19,7 @@ public interface ProductRepository extends JpaRepository<Product, Long>{
  */
 	
 /*@Query anotação JPA para executar JPQL e SQL queries	
- * JPQL é diferente de um SQL puro exe abaixo.
+ * JPQL é diferente de um SQL puro exemplo abaixo.
  * SELECT "novevariavel" FROM Product "repeteOnomeDaVariavel" where
  * ":" ande da variavel faz referencia ao objeto do find.
  * o Product faz referencia a entidade e n a tabela.

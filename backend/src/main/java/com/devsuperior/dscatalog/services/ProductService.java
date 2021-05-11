@@ -85,7 +85,7 @@ public class ProductService {
 	}
 	@Transactional
 	public ProductDTO update(Long id, ProductDTO dto) {
-		//comando da JPA para stanciar a entidade sem fazer uma requisição desnecessaria no banco.
+		//comando da JPA para estanciar a entidade sem fazer uma requisição desnecessaria no banco.
 		try {	
 			Product entity = repository.getOne(id);
 			copyDtoToEntity(dto, entity);;

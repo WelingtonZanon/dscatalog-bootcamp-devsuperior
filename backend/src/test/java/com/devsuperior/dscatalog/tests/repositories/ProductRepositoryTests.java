@@ -20,7 +20,7 @@ import com.devsuperior.dscatalog.repositories.ProductRepository;
 import com.devsuperior.dscatalog.tests.factory.ProductFactory;
 
 /*
-anotação para que carregue somente componentes da JPA, no caso como é
+anotação para que carregue somente componentes da SpringJPA, no caso como é
 somente para testar o repositorio na precisa carregar todos os componentes
 da aplicação. 
 
