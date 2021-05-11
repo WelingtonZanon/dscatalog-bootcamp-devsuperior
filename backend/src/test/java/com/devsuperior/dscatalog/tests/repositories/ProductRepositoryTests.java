@@ -37,6 +37,7 @@ public class ProductRepositoryTests {
 	private long countPCGamerProducts;
 	private Pageable pageable;
 	private long countCategory3Products;
+	private PageRequest pageRequest;
 	
 	@BeforeEach
 	void setUp() throws Exception{
@@ -45,7 +46,15 @@ public class ProductRepositoryTests {
 		countTotalProducts = 25L;
 		countPCGamerProducts = 21L;
 		countCategory3Products = 23L;
-		PageRequest.of(0, 10);
+		pageRequest = PageRequest.of(0, 10);
+	}
+	
+	@Test
+	public void findShouldReturnNothingWhenNameDoesNotExist() {
+		
+		String name = "Camera";
+		Page<Product> result = repository.find(null, name, pageRequest);
+		Assertions.assertTrue(result.isEmpty());
 	}
 	
 	@Test
